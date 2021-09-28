@@ -1,0 +1,69 @@
+﻿{% extends 'Chairman/index.html' %}
+{% block content %}
+<section class="content home">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-5 col-md-5 col-sm-12">
+                <h2>Profile <small class="text-muted">Welcome to Super City</small></h2>
+            </div>            
+            <div class="col-lg-7 col-md-7 col-sm-12 text-right">
+                <button class="btn btn-white btn-icon btn-round d-none d-md-inline-block float-right m-l-10" type="button">
+                    <i class="zmdi zmdi-edit"></i>
+                </button>
+                        
+                <ul class="breadcrumb float-md-right">
+                    <li class="breadcrumb-item"><a href="{% url 'index' %}"><i class="zmdi zmdi-home"></i> Super City</a></li>
+                    <li class="breadcrumb-item">{{context.uid.role}}</li>
+                    <li class="breadcrumb-item active">Profile</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">                            
+    <div class="row clearfix profile-page">
+        <div class="col-lg-4 col-md-12">
+            <div class="card profile-header">
+                <div class="body text-center">
+                    <div class="image"><a href="{% url 'Cprofile' %}"><img src="{{context.cid.profile_pic.url}}" alt="User"></a></div>
+                    <div>
+                        <h4 class="m-b-0"><strong>{{context.cid.firstname}} {{context.cid.lastname}}</strong></h4>
+                        <span class="job_post">{{context.uid.role}}</span>
+                        <p>{{context.cid.house_id.house_no}}-Super City<br>Bhadaj, {{context.cid.locality}} 380060</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary btn-round">View Family Members</button>
+                    </div>
+                </div>                    
+            </div> 
+            <div class="card">
+            </div>                 
+        </div>
+        <div class="col-lg-8 col-md-12">
+            <div class="card">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#about" style="color: #888;">About</a></li>                       
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane body active" id="About">
+                        <form action="{% url 'Cprofile' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="email" value="{{context.uid.email}}" readonly disabled>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Current Password" name="cpassword">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="New Password" name="npassword">
+                            </div>
+                            <input type="submit" class="btn btn-info btn-round" value="Save Changes">
+                        </form>
+                        <hr>
+                    </div>                        
+                </div>
+            </div>               
+        </div>
+    </div>
+    </div>
+</section>
+         {% endblock %}
